@@ -2,6 +2,16 @@ package com.example.lab08;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class CustomListTest {
+
+    private CustomList mockCityList() {
+        CustomList cityList = new CustomList();
+        cityList.addCity(mockCity());
+        return cityList;
+    }
+    private City mockCity() {
+        return new City("Edmonton", "Alberta");
+    }
+
     @Test
     public void testHasCity() {
         CustomList list = new CustomList();
@@ -13,17 +23,17 @@ public class CustomListTest {
 
     @Test
     public void testDelete() {
-        CityList cityList = new CityList();
+        CustomList list = new CustomList();
         City city = new City("Regina", "Saskatchewan");
-        cityList.add(city);
-        assertTrue(cityList.hasCity(city)); // Check if the city is added
-        cityList.delete(city);
-        assertFalse(cityList.hasCity(city)); // Check if the city is deleted
+        list.addCity(city);
+        assertTrue(list.hasCity(city)); // Check if the city is added
+        list.delete(city);
+        assertFalse(list.hasCity(city)); // Check if the city is deleted
     }
 
     @Test
     void testDeleteException() {
-        CityList cityList = mockCityList(); // This creates a list with "Edmonton"
+        CustomList cityList = mockCityList(); // This creates a list with "Edmonton"
         City city = new City("Regina", "Saskatchewan"); // A city that is not in the list
 
         // Assert that trying to delete a non-existent city throws the correct exception
